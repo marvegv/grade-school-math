@@ -8,12 +8,12 @@ from torch.utils.data import DataLoader
 from transformers import AutoTokenizer, T5ForConditionalGeneration
 
 
-def main():
+def main(device='cpu'):
     tokenizer = AutoTokenizer.from_pretrained("t5-small", model_max_length=512)
     model = T5ForConditionalGeneration.from_pretrained("t5-small")
     train_dset = GSMDataset(tokenizer, train_examples)
 
-    device = th.device("cuda")
+    device = th.device(device)
     model.to(device)
     model.train()
 
