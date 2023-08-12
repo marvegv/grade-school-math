@@ -8,13 +8,11 @@ from torch.utils.data import DataLoader
 
 
 def main():
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    train_examples = get_examples("train")
+    tokenizer = AutoTokenizer.from_pretrained("t5-small", model_max_length=512)
+    model = T5ForConditionalGeneration.from_pretrained("t5-small")
     train_dset = GSMDataset(tokenizer, train_examples)
 
     device = th.device("cuda")
-    config = GPT2Config.from_pretrained("gpt2")
-    model = GPT2LMHeadModel.from_pretrained("gpt2", config=config)
     model.to(device)
     model.train()
 
