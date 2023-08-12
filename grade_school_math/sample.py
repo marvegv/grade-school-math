@@ -5,8 +5,8 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from transformers import AutoTokenizer, T5ForConditionalGeneration
 
 
-def main():
-    device = th.device("cuda")
+def main(device='cpu'):
+    device = th.device(device)
     tokenizer = AutoTokenizer.from_pretrained("t5-small", model_max_length=512)
     model = T5ForConditionalGeneration.from_pretrained("t5-small")
     model.to(device)
